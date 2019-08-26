@@ -1,0 +1,24 @@
+SonarQube Configuration in maven:
+================================
+ We have to add below 2 steps in settings.xml file to configure sonarqube in maven project
+ file location is *\apache-maven-3.5.2\conf\settings.xml
+ 
+Step1:
+=====
+  <pluginGroups>
+	<pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+	</pluginGroups>
+  
+Step2:
+=====
+  <profiles>
+   <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+			<properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  http://localhost:9000
+                </sonar.host.url>
+            </properties>

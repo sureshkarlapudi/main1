@@ -1,0 +1,222 @@
+Docker:
+======
+
+How to deploy and access the application from docker
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
+Docker is containergation platform
+Doesn't require guest OS, it will run using host oS
+Easy bootup process it is light weight process, so that bootup process is very speed.
+Dynamic resource utilization.
+Using docker, we can easily packaging the applications and moving from one environment to another (ex: dev to test)
+
+ -> If you have docker container created in windows, you can not move it to Linux. Same for Linux to windows as well.
+ -> When we create containers in windows, windows Kernel will be subdevided into multiple containers.
+ -> Since windows kernel and Linux kernel both are different and will not support each other.
+ 
+ 
+ Docker Architecture
+ 1. Docker Images
+ 2. Docker Containers
+ 3. Docker Registry
+ 4. Docker Deamon/Runtime/Host
+ 5. Dcoker Client
+ 
+ Docker Deamon:
+ =============
+ -> Dcoker Deamon runs on a host machine or Docker deamon is a service which runs in the back end on our machine which we have docker host.
+ -> Docker Host is whcih we have installed docker software. 
+ -> The user uses the docker client to interact with the deamon.
+ -> Deamon is responsible for creating, running and monitering containers.
+ -> Building and storing images
+ 
+ which docker -> to verify the installation
+ docker ps -> To check the running containers status
+ docker ps -a -> To check the status of all cntainers running/exited
+ 
+ For Pull you do not need account.
+	 Push you need account.
+ -> docker help
+ -> docker [command] --help
+ -> docker pull ubuntu
+ -> docker pull ubuntu:[version]     Note: If we dont specify the version here, it will consider it as latest by default.
+ -> docker start considerid/Name  ----To start the container
+ -> docker attach [Name/ContainerID] ----To login into the container
+ -> docker run -it ubuntu /bin/bash  ----To create the container i-interactive, t-terminal & enter into it
+ -> docker run -itd ubuntu /bin/bash ----To create container and it will run in the background, we can comeout from it without stopping it.
+ ctrl +p +q ----To comeout from the container without stopping it.
+ -> docker run -it ubuntu --name="mycontainer" ubuntu /bin/bash
+ -> docker exit (this will stop the container)
+ -> docker inspect/  docker history ubuntu
+ -> docker search "keyword" ---- To search for images in Docker hub
+ -> docker search -s 100 "keyword" ---- To search for images in Docker hub up to 100 stars
+ -> docker tag [existing image name] [new name] ----TO rename the image
+ -> docker exec -it ContainerID bin/bash ----To enter into the container (it will not stop the container even if you use EXIT command)
+ -> docker exec -it container id /bin/cat /etc/passwd ----To read the passwd file without entering into container
+ -> docker exec -it container id /bin/touch /opt/file1 ----To create file in opt directory without entering into container
+ -> docker logs <containerid> ----To display the container logs
+ 
+ -> docker inspect <containerid> ----To display the full detais of the container or container history like Container Id, created date, path, status, Hostname, host path, started, finished and network details etc.
+ -> docker inspect <containerid> | grep IPA ----To search about IP address or if you want to search particular keyword
+ -> docker history <image id> ----To display the history of image not for container.
+ -> docker history --no-trunc <image id/name> ----To display the full details of image like when created,created by, when it was up/down, size etc.
+ -> docker tag <old image id/name> <new image id/name:latest/version (anything that user defined)
+ ex: docker tag hello-world helloworld:v-1.1 ----This will create duplicate image with user defined name/tag
+ 
+ -> docker run -it -p 8085:8080 jenkins ----To run the container with pre installed Jenkins and run on a specific port.
+ 
+ Create shared volumes from Host location to container and container to host location:
+ ====================================================================================
+ -> docker run -itd -v /opt/batch-21:/opt/test <image/container name/id>   ----Creating shared volume from Host to container
+ ----Here we have some data in batch-21 folder in Host machine. Now we want to share data from batch -21 to test folder whcih we are going to create in container. 
+ ----Then test folder will be the shared folder and whatever we create in batch-21 will be replicate in test as well.	
+ 
+ -> docker run -itd --volumes-from cid/cname (existing container) cid/cname (new or existing) ----Shared volumes between containers
+ 
+ -> docker run --name <containername> <image name>
+ -> docker rename <old name> <new name>
+ -> docker rmi -f image id/image name  -----To remove image
+ -> docker rmi -f image id1 image id2 image id3 ----To remove multiple images
+ -> docker build -t <name>
+ -> docker ps -aq ----To display only container id list
+ -> docker rm $(docker ps -aq)
+ 
+ rpm -qa | grep <package name>  ---- To check whether package is installed or not
+ ex: rpm -qa | grep httpd
+	 rpm -qa | grep wget
+	 
+	 
+User Creation & Login with Particular User:
+===========================================
+-> Connect to the container in which you want to create user and then follow below commands.
+[root@centos2 ~]# useradd <user name>
+[root@centos2 ~]# passwd <password>
+
+docker exec -it -u <username> containerid /bin/bash  ----To login with particular username
+
+
+Manually assign user defined server name to container:
+=====================================================
+Default step:
+docker run -it <considerid/Name> ----It will assign container id as host name
+Ex: [root@43141422c9f7 /]#
+
+Manual step:
+docker run -it -h <manual hostname> <considerid/Name>
+ex: docker run -it -h server-1 centos
+	[root@server-1 /]#
+ -> If you want to change Container name maullay go to /etc/hosts and edit the hosts file change it.
+
+
+ -> Below steps To create own image 
+ 
+docker file: Add below conent in the file as per the requirement.
+
+FROM centos:latest
+MAINTAINER devops2018 <---email for user--->
+RUN yum update -y
+RUN yum install -y git httpd wget
+RUN mkdir /opt/test-dir
+RUN touch /opt/test-dir/test1
+ENV JAVA_HOME=<java home path>
+USER devops1
+
+
+ 
+ QX4A1G1524223
+ 
+ sudo apt-get update
+
+docker pull
+docker image
+
+
+suresh@suresh-virtualbox@ sudo -i
+
+curl :Depends: libcurl3-gnutls
+
+
+UNIX Commands:
+==============
+iptables -F ----To enable the ports 
+
+
+
+
+
+Network:
+=======
+ -> docker network ls ----To display the all networks related to docker
+ -> docker network rm <Network name/id>
+ NOTE: default networks are bridge, host, none.
+ -> docker network ls --no-trunc
+ -> docker network inspect Network NAME/Network ID ----It will display the full details of network
+ -> docker network create --subnet 10.1.0.0/24 --gateway 10.1.0.1 bridge-1 ----To create new network (bridge-1 is network name)
+ -> docker network create --subnet 10.1.0.0/16 --gateway 10.1.0.1 --ip-range=10.1.4.0/24 --driver=bridge --label=ownbridge bridge-new
+ -> docker run -it --net bridge-new centos ----It will assign within IP range from bridge-new to centos.
+ -> docker run -it --net bridge-new --ip 10.1.4.35 centos ----It will create container and assign the given IP to that.	
+ -> docker run -it --net bridge-new --ip 10.1.4.35 -m 300M centos ----To allocate fixed memory to container.
+ -> docker stats <container id> ----To display the memory details for container.
+ man touch 
+ man docker-network-create
+ 
+ ifconfig  -- If any error follow the below commands
+ hostname -I
+ yum install -y net-tools
+ ifconfig
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    attach    Attach to a running container
+    build     Build an image from a Dockerfile
+    commit    Create a new image from a container's changes
+    cp        Copy files/folders between a container and the local filesystem
+    create    Create a new container
+    diff      Inspect changes on a container's filesystem
+    events    Get real time events from the server
+    exec      Run a command in a running container
+    export    Export a container's filesystem as a tar archive
+    history   Show the history of an image
+    images    List images
+    import    Import the contents from a tarball to create a filesystem image
+    info      Display system-wide information
+    inspect   Return low-level information on a container or image
+    kill      Kill a running container
+    load      Load an image from a tar archive or STDIN
+    login     Log in to a Docker registry
+    logout    Log out from a Docker registry
+    logs      Fetch the logs of a container
+    network   Manage Docker networks
+    pause     Pause all processes within a container
+    port      List port mappings or a specific mapping for the CONTAINER
+    ps        List containers
+    pull      Pull an image or a repository from a registry
+    push      Push an image or a repository to a registry
+    rename    Rename a container
+    restart   Restart a container
+    rm        Remove one or more containers
+    rmi       Remove one or more images
+    run       Run a command in a new container
+    save      Save one or more images to a tar archive
+    search    Search the Docker Hub for images
+    start     Start one or more stopped containers
+    stats     Display a live stream of container(s) resource usage statistics
+    stop      Stop a running container
+    tag       Tag an image into a repository
+    top       Display the running processes of a container
+    unpause   Unpause all processes within a container
+    update    Update configuration of one or more containers
+    version   Show the Docker version information
+    volume    Manage Docker volumes
+    wait      Block until a container stops, then print its exit code
+	
+	
+	
+Doubts:
+======
+TAG-> Will it create new with new name
+TO create container do we need image?
+shared volmes

@@ -1,0 +1,50 @@
+ Jenkins Installation:
+ ====================
+ 1. Install Java
+ 2. Install tomcat
+ 3. Download jenkins.jar
+ 4. Deploy the jenkins.jar into tamcat webapps folder. tomcat/webapps
+ 5. start catalina.sh (./catalina.sh start ) tomcat/bin
+ 6. Check logs for tomcat server status and pwd. tomcat/logs. (use tail command. ex: tail -200f catalina.out)
+ 7. Use web browser to access jenkins application (url- localhost:8080/jenkins)
+ 
+ Linux Quick Notes:
+ ==================
+ USER (root) ex: mkdir zoomgroup
+ SHELL (/bin/bash) - Converts human readable language into binary language.
+ Linux Kernel - It verify the purpose of command/task
+			  - It verify the command provided correct or incorrect
+			  - It allocate RAM memory to programme
+			  - It schedule process id for each working programe
+ Hardware - It checks all i/o devices (Printers, Disks)
+ 
+ 
+ Recommended Partition Size:
+ Partition  Size
+	/boot	200 MB
+	/		8000 MB
+	/usr	10000 MB
+	/var	10000 MB
+	/home	2000 MB
+	swap	Twice the RAM size
+	
+	/ - is a root directory, which is also called top level directory, because all the sub directories are mounted under it.
+	/root - This is a default directory of linux super user that is root.
+	/home - This is a default directory of all normal users, If user name is Sam, then default directory can be /home/Sam.
+	/boot - It contains bootable files, boot loader and Kernel Information.
+	/sbin - System binary, this directory contains all commands which can be used by only super user.
+			Ex: useradd, fdisk and dump etc.
+	/bin - This directoy cantins all the commands which can be used by super user and norml users.
+			Ex: cat, vi,touch etc.
+	/usr - Unix system resources, This filesystem contains all the files nothing but applications file which contain .rpm extension unlike in windows there is 		.txt extension which present in programfiles.
+	/var - This file system contains all the log files which keeps the records of executed query.
+			Ex: web server, mail server etc.
+	/dev - Device, This file system contains all the block files of executed resource records of external medias and hard drives.
+	/etc - It contains all configuration files which are useful to configure servers.
+	/opt - Optional,By default this is an empty folder which is mainly used to configure third party applications.
+	/media - This is a default directory to access all removable devices like pendrive and DVD-ROM etc.
+From RHEL-7 onwards /run is a new directory which can be used like a /media.
+	/tmp - It contains all the temporary files of all working programs.
+	/proc - Process, This file system all the process id's working programs.
+	/lib - It contains all library files which are useful to exetue the commands.
+	

@@ -1,0 +1,26 @@
+Ansible:
+=======
+
+apt-get update
+apt-get install epel-release
+apt-get install git phython phython-devel phython-pip openssl ansible 
+ansible --version
+ Installation will be done in /etc/ansible
+ -> Open ansible.cfg file and remove comments for the below lines.
+ vi ansible.cfg
+ 
+ inventory
+ sudo_user
+ 
+ :wq!
+ 
+ vi hosts
+ 
+ If you want to give full permissions to particular user, enter below command it will open the file, then add user in the file.
+ /etc/visudo
+ 
+ ansible all -m ping
+ 
+ -m is module
+ -a is attribute
+ 

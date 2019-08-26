@@ -1,0 +1,26 @@
+Jenkins:
+=======
+
+To change admin initial password: Manage Jenkins -> Manage Users
+Enable Auto Refresh -> If we enable it will refresh Jenkins for every 15 sec.
+add description: To display the sample message on Home page.
+People: To disply how many users in Jenkin server.
+jenkins.xml -> If we want to change the default port for jenkin, we can modify it in this file. We have to reboot once after this change.
+			-> Restart from services.msc or localhost:8080/restart is force restart
+			-> localhost:8080/safeRestart will wait till jobs are finished.
+My View: it's like favorites
+
+Jobs & Plug ins for back up
+
+Reload Configuration from Disk: This is Jenkins server home directory
+
+BUILD TRIGGERS:
+===============
+TO run the Job remotly/using URL: Build Triggers -> Trigger builds remotly
+
+
+d23b18cc3fa91cef74b8903f987bca89934d5983
+
+
+Generate a token
+d23b18cc3fa91cef74b8903f987bca89934d5983

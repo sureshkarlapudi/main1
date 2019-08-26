@@ -1,0 +1,215 @@
+Ansible:
+=======
+What is Configuration Management:
+ -> Configuration management is a management of your software on top of your hardware. What it does is, it maintains consistency of your product based on it's requirements, it's design, phsycal & functional attributes.
+ -> It will have visibility & control, Visibility is continuously check and monitor the performance of all your systems.
+ -> Anytime if your sytem performance is dgrading the configuration system will notify you and hence you can prevent error before actually it occurs.
+ -> You have the power to change anything, If any of your server failed you can reconfigure it again and repaire it. so that it is up & running again or even you replace the server if needed.
+ -> Also the CM system holds the entire historical data of your infrastructue, It documents all the snapshots of every version of your infrastructure.
+ -> CM facilitates the orderly management of your system information and system changes, so that you can use it for beneficial purposes.
+ -> Snapshots & documents means, It records the configuration details, which are nothing but data description of overall state of your system at perticular time.
+ -> CM system will have it's own repository which is known as CMDB, this is where ALL THE CONFIGURATION DETAILS WILL BE STORED.
+ -> CM tool will interact with the CMDB 
+ 
+ Installation: apt-get install ansible
+ Why:
+ ===
+ 1. Managing multiple servers:
+ 2. Scaling up & scaling down
+ 3. Code deploy in different environements
+ 4. No tool to document different versions of application
+ 
+ 
+ Features:
+ ========
+ 1. Simple to install & setup
+ 2. Agentless- No need of any agent or client software  to manage the nodes
+ 3. Powerfull
+ 4. Efficient: Extensible with modules written in any programming language 
+ 5. Built on top of Python and hence provides a lot of Python's functionaity. We can use Python functionaity in Ansible.
+ 6. Use SSH for secure connections - SSH is simple password less network authentication protocol, it's very secure as well
+    Note: All we have to do is, just generate a public key in your control machine and copy the same in your node machine.
+ 7. Follows push based architecture for sending configurations.
+ 8. Very easy & fast to setup, minimal requirements.
+ 
+ It uses playbooks to deploy, manage, build, test and configure anything from full server environments to websites to custom compiled source code for applications.
+ Ansible Architecture:
+ ====================
+ Ansible is IT automation, configuration management and Provisioning tool, It uses playbooks to deploy, manage, build, test and configure anything from full server environements to websites to custom compiled source code for applications.
+ 
+ 
+ Ansible will work SSH key less authentication master.
+ 
+ Ansible is configuration, deployment and Orchestration language.
+ 
+ Provisioning:
+ ============
+ To provide or supply something that is needed. Ansible make sure that all necessary packages and all other softwares downloaded & installed in your computer inorder to run your application.
+ 
+ Inventory: It is nothing but list of all IP addresses of all my host machines, default location is /etc/ansible/hosts
+ -> Playbook describe the entire workflow of your system ( Inside palybooks we will have modules, APIs, Plugins
+ -> Modules are core files, Playbook contains set of place whcih are set of tasks. Inside every task there is a particular module.
+ -> When you run playbook it's the module actually get executed on all your node machine.
+ -> Ansible comes with inbuilt modules, which we can use and also customize.
+ -> We have different modules like cloud modules, database modules.
+ 
+ Playbooks:
+ ==========
+ -> Playbooks are simple files written in YAML code.
+ -> YAML is data serialization language 
+ -> Playbooks always executes tasks in order.
+ -> Playbooks contains plays, Play contains different Tasks, Task contians modules
+ -> When you run a playbook, actually the modules gets executed in your host. This actually contains some kind of action in them, when you run a playbook those actions takes place on your host machines.
+ -> Core modules in playbook like file modules, cloud modules, Database modules 
+ 
+ Playbook structure:
+ ===================
+ -> Playbook is actually defined your workflow, because whatever you write in the playbook it actually get's executed in the same order taht you have written them.
+ Ex: If you have written install package first, and then start it. It will execute the same.
+ -> Ansible playbooks always executes tasks in order.  
+ -> Playbook always stats with 3 dashes on the top
+ HOSTS - List of all host mchines, It means where do you want this playbook to run 
+ VARIABLES
+ TASKS - Different task that you want to execute. Task gets executed in the same order that you write 
+ HANDLERS
+ 
+ HOST INVENTORY: It contains list of your hosts, grouped together. Default location is /etc/ansible/hosts 
+  ex: [webserver]
+	  10.2.5.19
+	  10.2.5.20
+	  
+	  [dbserver]
+	  10.2.5.21
+	  
+	  
+ MODULES: 
+	- Modules (also referred as task plugins or library plugins) are the ones which actually gets executed inside a playbook.
+	- These are scripts that come packaged with Ansible and perform some kind of action on the host.
+	Ex: apt - Install or removes packages using the apt package manager
+		copy - copies a file from local machine to host.
+		file - sets the attributes of a file, simlink or directory.
+		service - starts, stops or restarts a service.
+		
+ HANDLERS:
+	- HANDLERS are tasks that get run after certain triggers, and the trigger here is the notify section.
+	- HANDLERS are always run the end of the play and these are run only once. N o matter how many times you run playbook, HANDLERS will run only once.
+    - We will specify the notify section to trigger the HANDLERS.	
+ 
+ Ansible AD-HOC Commands:
+ =======================
+ -> These commands are simple oneline commands inorder to perform the task.
+ -> Sometime we really want to do something quick and you dont want to write a whole playbook, for thatwe can write adhoc commands.
+ 1. ansible all -s -n shell -a 'uptime' --------------> Uptime of all machines
+ 2. ansible all -s -n shell -a 'date'-----------------> Date of all machines
+ 3. ansible all -s -n shell -a 'cat/etc/redhat-release'-----> redhat release of all machines
+ 4. ansible all -s -n shell -a 'mount' ---------------> Kind of mount on all machines
+ 5. ansible all -s -n shell -a 'service sshd status'--> Check the service status on all machines
+ 6. ansible --version
+ 7. ansible-playbook <name.yml>
+ all - deploy it in all machines 
+ shell - is a module
+ 
+ How to Use Ansble:
+ ==================
+ Ansible can be used for 
+ -> Application Deployment
+ -> Configuration Management
+ -> Securi2ty &  Compliance
+ -> Provisioning
+ -> Orchestration - 
+ 
+ What is Orchestration?
+ ======================
+ -> Orchestration means, Let's say we have defined configurations for each of my systems, but I also need to make sure how this configurations interact with each other. So this is the process of Orchestration when I decide that how different configurations on different of my systems in my infrastructue would interact with each other inorder to maintain a seemless flow of my application and your application deployment needs to be Orchestrated
+ 
+ > ansible --version
+ To check SSH connection whether it is working or not using ansible
+ ansible -m ping <group name>
+ ex: ansible -m ping test-servers
+ 
+ To run the playbook:
+ > ansible-playbook <name.yml>
+ 
+ 
+ Below is the process to connect to Node machine:
+ ===============================================
+ -> Generate public ssh key in control machine, and copy it to node machine using below commands.
+ 
+ 1. Generate the public key using below command.
+ > ssh-keygen
+ default location is /root/.ssh/id_rsa	
+ 2. Copy the key from control machine to Node machine using below command
+ > ssh-copy-id -i root@192.1.1.1
+ 
+ 3. Add Node ip address in the host file (/ansible/hosts)
+ 4. Use below command to test
+ > ansible -m ping 'test-servers'
+ 
+ Creating user & assign permissions in Ansble server:
+ ===================================================
+ step1:
+ > visudo    ----->This will open the sudo file which will control the user permissions
+ step2:
+ -> Add username in the file like below.
+ <username> ALL=(ALL)	NOPASSWD: ALL
+ ex: suresh ALL=(ALL)   NOPASSWD: ALL
+ Note: Now username(suresh) will be equal to root and suresh user will have all permissions whtever root has.
+ 
+ 
+ 
+ ps waux | grep ngnix
+ 
+ 
+ ansible all -m ping
+ ansible all -a "ls -l /opt"
+ ansible all hostname
+ ansible <lable name> "ls -l /opt"
+ 
+ ansible client  -m yum -s -a "name=git state=absent"  ----> We are running this command in server to uninstall the git software in client machine.
+ ansible client  -m yum -s -a "name=git" or ansible client  -m yum -s -a "name=git state=present/latest" ----> To install the git in client machine.
+ ansible client -a "git --version"
+ ansible client -m yum -s -a "src=source_path dest=dest_path"
+ 
+ ansible client -m user -s -a "name=<username>" ----> TO create user in client
+ sudo passwd <username> ----> To set the password
+ ansible client -m user -s -a "name=<username> state=absent" ---->To delete user from client server
+ 
+ -> Users will be store in /etc/passwd file.
+ 
+ ansible client -m service -s -a "name=httpd state=stopped"
+ ansible client -m service -s -a "name=httpd state=started"
+ 
+ 
+ ansible all --list-hosts   ---->To dispaly all the groups from host file
+ 
+ 
+ 
+ ---
+ - hosts: client
+   become: yes
+   tasks:
+	-name: httpd installing
+	 yum: name=httpd state=latest
+	 
+Host Inventory File Location:
+=============================
+ - etc/ansible/hosts
+ 
+ 
+ 
+ Sample Playbook:
+ ===============
+ ---
+ - hosts : test-servers
+ 
+   taks :
+    - name : install nginx
+	  yum  : pkg=nginx state=installed
+	  
+	  notify:
+	    - start nginx
+		
+	handlers :
+	 - name : start nginx
+	   service : name=nginx state=started
+ 

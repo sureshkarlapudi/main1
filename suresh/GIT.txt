@@ -1,0 +1,73 @@
+This DevOps Training helps you master Configuration Management, Continuous Integration and Continuous Deployment, Continuous Delivery, Continuous Monitoring using DevOps tools - Git, Chef, Docker, Jenkins, Puppet, Ansible and Nagios to automate multiple steps in SDLC.
+
+1. Configure gitlab server
+2. Architecture
+3. Commands
+4. How to use this in real time environment for project management
+5. What are the different commands
+
+6. Jenkins	
+
+
+
+GIT
+===
+ -> Downloaded the package
+ -> Installed GITLAB -CE (Community Edition)
+ -> After that, executed the gitlab ctl reconfigure command
+ -> Reconfigre command is going to execute the cookbooks in the backend
+ -> Cookbooks will contains multiple components going to be excuted (all the services) 
+ 
+ gitlab is distributed environment, we are going to do everything in our local, there is no impact for other users while devoloping/modifying the code, Once we push it will ask if somebody is modified.
+ -> Git is a distributed version control tool. It will provide you to create a local repository in your machine and also help you to access remote repository to fetch files from there and push files into that.
+ 
+ Repository:
+ ===========
+ 1. Central Repository
+ 2. Local Repository
+ -> git init - Install git on your local machine and use git init to create your local repository. (go to the path where you want to create repository in your local and execute git init then .git folder will be created. This will be your local repository)
+ -> git clone - Download or clone your repository from GitHub.
+
+ 
+ step:2
+ -> git remote add origin "https://github.com/Hariprasadnaidu/cucumberbasic.git"
+ 
+  -> If you are working in completely new project you can use git init to create the repository.
+ -> If you want to join ongoing project use git clone to download the repository fom GIT hub.
+ * git init - Creating repositories
+ * add origin, push pull - Syncing repositories
+ * status, add, commit - Making changes
+ * branch, merge, rebase -  Parallel development
+ 
+ -> git pull origin master --It will fetch all the files from central repository to your local machine.
+	- When we are storing the files in central repository, that files are all compressed. So when we are pulling it to workspace it will unpacked.
+ 
+ -> git remote -v  ---To know which remote repository linked with local repo.
+ -> git remote set-url --add origin "https://github.com/Hariprasadnaidu/cucumberbasic.git"  ---To update the existing remote URL
+ -> git remote rm origin/destination ---- To remove remote
+ 
+
+ 
+ Create Repository
+ Syncing Repo
+ -> git remote add origin "url" - To add your origin to remote.
+ -> git pull origin master - To fetch all file from central to local repo.
+ When you storing all files in central repository that files are compressed.
+ When you pulling it, it will comes in compressed format, but when you are adding it in your workspace/staging area then it will unpack and then you can use.
+ While working with it, it will be in uncompressed format.
+ git has Intermediate layer between workspace and local repository
+ When you want to make/commit changes to local repository you have to add those files to Index first.
+ If your files not in Index, you can not make/commit changes to local repository.
+ 
+ -> git add <file_name> --To add file to index 
+ -> git add -A ----To add all files to index
+ -> git commit -a -m "commiting changes" ----To commit all files with user defined message
+ 
+ 
+ -> To create Branch
+		$ git branch sureshbranch
+
+ -> To switch Branch
+		$ git checkout sureshbranch
+
+

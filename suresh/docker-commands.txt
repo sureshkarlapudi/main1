@@ -1,0 +1,171 @@
+
+cd /opt/docker
+ls
+rpm -ivh docker..................rpm
+
+
+
+yum update
+
+yum install docker
+
+docker --version
+
+service docker start
+
+docker images
+
+docker search hello-world
+
+docker pull tutum/hello-world
+
+docker images
+
+docker run -itd -p 8085:80 iid/iname
+
+ip:8085 (browser)
+
+docker ps
+
+docker stop cid
+=========================
+docker pull centos
+
+docker images
+
+docker run -it iname//iid
+-------
+------
+exit
+
+=====================================
+19/12/17
+
+docker pull ubuntu
+
+docker run -it ubuntu
+
+exit
+
+docker ps
+
+docker ps -a
+
+docker run -itd centos
+
+dcoekr ps
+
+docker attach cid
+
+exit
+
+ctrl +p +q
+
+dcoker stop cid
+
+docker ps -a
+
+docker start cid
+
+docker attach cid
+
+or
+
+docke run -itd iid
+
+docker ps
+
+docker exec -it cid /bin/bash
+exit
+
+docker ps
+docker stop cid
+
+
+
+
+docker login
+
+username
+passwd
+
+docker run -it centos
+
+yum git,httpd
+files
+dir
+
+ctrl pq
+
+docker ps
+docker commit cid
+
+docker images
+
+docker tag iid name (name of the dockerhub repo)
+
+docker push image-name
+
+==========================
+
+docker exec -it /bin/cat /etc/passwd
+docker inspect cid
+docker inspect cid | grep IPAddress
+docker run -itd --name server1 centos
+docker rename old-name new-name
+docker search jenkins
+docker search -s 10 jenkins
+docker exec -it -u prasad 5ad3f67b58d3 /bin/bash
+docker history iid
+docker history --no-trunc iid
+docker images
+docker tag iid centos1:v-1
+
+docker run -itd -v local:container centos
+
+docker run -itd --volumes-from cid centos
+
+
+docker network ls
+                              --no-trunc
+docker network inspect nid
+
+docker network create --subnet 10.1.0.0/24 --gateway 10.1.0.1 bridge-1
+docker network ls 
+ifconfig
+docker network rm bridge-1
+
+
+docker network create --subnet 10.1.0.0/16 --gateway 10.1.0.1 --ip-range=10.1.4.0/24 
+--driver=bridge --label= own-bridge bridge-new
+
+
+docker network ls
+
+docker run -it --net bridge-new centos
+
+hostname -I
+
+yum install -y net-tools
+
+ifconfig
+
+docker run -it --net bridge-new --ip 10.1.4.35  centos
+
+docker run -it -m 300M centos
+
+docker stats cid
+
+
+
+
+
+
+
+
+
+
+
+
+
+

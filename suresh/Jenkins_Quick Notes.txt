@@ -1,0 +1,157 @@
+Jenkins Beginner Tutorial:
+==========================
+https://www.youtube.com/watch?v=89yWXXIOisk&list=PLhW3qG5bs-L_ZCOA4zNPSoGbnVQ-rp_dG
+
+Step1: Download Jenkins
+Step2: Place the war file into any location on your system
+Step3: goto command prompt (windows) 
+	   goto folder where jenkins.war is
+	   execute java -jar jenkins.war
+Step4: goto browser -http://localhost:8080
+Step5: Install required plugins.
+Step6: get started with jenkins
+spoorty plugin
+
+https://jenkins.io/doc/book/pipeline/
+
+Jenkins:
+=======
+Jenkins is Continuous integration and Continuous deployment tool, and it is plug in based tool.
+
+localhost:8080  ----To open jenkin console  
+Note: Default port for Jenkins is 8080, But if you want to change it to user defined port follow like below
+ Process1:
+ -> Go to path where jenkins.war file is located and open the command prompt from same location, and run bemlow command.
+ > java -jar jenkins.war --httpPort=8085
+ 
+ Process2:
+ -> Go to home path (C:\Program Files (x86)\Jenkins\jenkins.xml) open jenkins.xml and change port to user defined.
+ 
+ To Restart Jenkins server: Do it from services.msc or localhost:8080/restart or localhost:8080/SafeRestart
+ 
+To Unlock Jenkins:
+------------------
+-> Get the password from file in below path.
+C:\Program Files (x86)\Jenkins\secrets\initialAdminPassword
+
+System Information: Is about Jenkins server information like when it started, plugins installed, environment variables, in whcih path you installed Jenkins
+Load statistics: It will show graphically information like system performance, whcich jobs are running, build utilization etc.
+Jenkins CLI: 
+
+
+
+
+git push
+test
+code quality check
+deploy
+
+
+compile -> post build - quality
+quality -> post build - test
+test
+
+
+Linuxgourney.com
+cd var/lib
+
+Section - 2:
+===========
+Jenkins:
+=======
+
+To change admin initial password: Manage Jenkins -> Manage Users
+Enable Auto Refresh -> If we enable it will refresh Jenkins for every 15 sec.
+add description: To display the sample message on Home page.
+People: To disply how many users in Jenkin server.
+jenkins.xml -> If we want to change the default port for jenkin, we can modify it in this file. We have to reboot once after this change.
+			-> Restart from services.msc or localhost:8080/restart is force restart
+			-> localhost:8080/safeRestart will wait till jobs are finished.
+My View: it's like favorites
+
+Jobs & Plug ins for back up
+
+Reload Configuration from Disk: This is Jenkins server home directory and it will restore entire Jenkins server from home directory
+
+Configure Systems:
+==================
+System Message: This message will display on the homepage
+# of executors: To increase/decrease the Build Executor Status count. If count is 2, we can run 2 jobs in parallel.
+Lables & Usage - Is part od Manage Node
+Quite Period: if it is 5 sec, and Job is scheduled for every 2 mins and quite period is 5 sec, Then after every 2 mins it will wait for 5 sec to start the build.
+
+
+Configure Global Security:
+==========================
+This is the security for entire Jenkins server, It will be enabled once you install Jenkins server.
+
+
+BUILD TRIGGERS:
+===============
+TO run the Job remotly/using URL: Build Triggers -> Trigger builds remotly
+
+
+d23b18cc3fa91cef74b8903f987bca89934d5983
+
+
+Generate a token
+d23b18cc3fa91cef74b8903f987bca89934d5983
+
+
+
+
+Manage Jenkins:
+===============
+Retry count is once code odified 
+System Message - Is lable message to display on the home page
+
+deploy to container plugin - We have to give executble file name, path and target server name/url.
+nested view 
+Build pipeline view
+Next build number plugin
+Disk Usage plug in
+Rebuilder - To rebuild the job with same parameters what you used in previous build without selecting manually
+Backup Plugin - To take the backup & restore Jenkins server
+Clone workspace SCM Plugin ----To clone the workspace from one job to another
+Agent SSH
+
+Node Concept/Master Concept/Slave Concept/Agent Concept (Manage Nodes):
+======================================================================
+Once we create node, slave.jar will be created under /opt/jenkins/ and this file will be the communication between master & slave
+
+ -> Master & Slave machines should have same jdk version in both machines. Otherwise, slave can not communicate with Master.
+ -> To create node we require remote server ip, username password, and workspace.
+		   |----	
+Master ----|
+
+https://www.youtube.com/watch?v=m47MWSXNslg&list=PLhW3qG5bs-L_ZCOA4zNPSoGbnVQ-rp_dG&index=3
+
+
+SonarQube:
+==========
+ -> It is a code quality tool
+ -> It will check the code process devoloped by devoloper like how the code complexity (whether it is easy to understand or difficult), if there are any duplicates, how the code design, more comments, how the code architecture is, what are the major/minor issues.
+ -> It will generate the report along with all details.
+ -> It's open source devoloped by Java language
+ 
+ Code quality check can be done in 3 ways.
+ -> 1. Go to location where code exist
+ -> 2. Integration with maven
+ 
+ E:\DevOps\sonarqube-6.5\sonarqube-6.5\sonarqube-6.5\bin\windows-x86-64\StartSonar.bat double click on this, this will start the sonar
+ 
+ 
+ 
+ 
+ 
+ 
+ mvn build
+ mvn test
+ mvn compile
+ 
+ Delivery Pipeline:
+ ==================
+ Developer Compile - Developer code review - QA Unit test case - QA Metric check - QA Package - Deploy
+ 
+ 
+ sudo apt-get remove --purge jenkins

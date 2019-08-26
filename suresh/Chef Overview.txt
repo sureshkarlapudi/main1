@@ -1,0 +1,135 @@
+Chef:
+=====
+
+Chef Workstation	->	Chef Server	-> Client server
+
+Cookbooks
+Recipies
+Resources
+
+ -> Install CHEF/Login manage.chef.io and create Organization
+ -> Go to Administration->select Organization name->Started Kit and download
+ -> Once extract, you can see default folders (chef-repo/.chef, cookbooks, roles)
+ -> In .chef folder one PEM file will be created with your project name, it will have private key.
+ -> Install chefDK in chef workstation and Install chef client in chef node.
+ 
+ Knife bootstrap ipaddress -x user -P paasword -N node1 (goto chef-repo folder path and execute)
+ -> once after execution, chef client will be installed in respective server and also chef node information will be stored in chef server.
+ 
+
+ -> Chef workstation will communicate with the chefserver through passcode in .chef folder
+ 
+ Ruby File Syntax:
+ ----------------
+ type type name do
+ attribute : value
+ end
+ 
+ for file:
+ =========
+ file "file name" do
+ action: create/delete
+ end
+ 
+ for directory:
+ =============
+ directory "/opt/devops-2" do
+ owner "root"
+ group "root"
+ mode "0777"
+ action :create
+ end
+ 
+ 
+ If there is no action specified, then default is create.
+ 
+ >chef-repo> chef-apply file.rb --To execute the .rb file in workstation
+ 
+ >chef-repo>cookbooks>chef generate cookbook sample-1   --To create the cookbook
+ >chef-repo>cookbooks>knife cookbook test sample-1  --To test the code
+ >chef-repo>cookbooks>knife cookbook upload samle-1  --To upload the cookbook (new/modified) into server
+ >chef-repo>cookbooks>knife cookbook delete sample-1 --To delete the cookbook 
+ >chef-repo>cookbooks>knife cookbook list --To list all cookbooks from server
+ 
+ -> Once upload, we can see the cookbooks under POLICY tab.
+ 
+ -> To assign the cookbook to chef client go to NODES>Run List and assign.
+ -> Once assign go to chef client and /opt> chef-client
+ 
+ Instead of Manual process, we can add cookbook to chef client directly from workstation by using below command.
+ >chef-repo>cookbooks>knife node run_list add Node-1 "recipe[sample-1]"
+ >chef-repo>cookbooks>knife node run_list remove Node-1 "recipe[sample-1]"
+
+ 
+ NOTE: When you have multiple recipies in your cookbook, and if you assign the cookbook in the run list, by default it will consider the default.rb
+		We manually have to add other recipies to run_list.
+ 
+ package "httpd" do
+ action :install
+ end
+ 
+ service "httpd"
+ action [:enable, :start]
+ end
+ 
+ or
+ 
+ service "httpd"
+ action :enable
+ exit
+ 
+ service "httpd"
+ action :start
+ exit
+ 
+ 
+ Databags: flow is > create data bags in workstation--> Upload into server --> Create cookbook and call data bags
+ ==========
+ Data Bags are nothing but Global variables and should be defined in .json format.
+ 
+ -> Create data_bags directory in chef-repo folder and create users, groups under data_bags.
+
+ -> chef-repo>data_bags>knife data bag create users
+ -> chef-repo>data_bags>knofe data bag create groups 
+ 
+ In chef client if you opn the passwd file using cat etc/passwd
+ format looks like below:
+ dockerroot:x:989:984:Docker User:/var/lib/docker:/sbin/nolgoin
+ username:password field:user id: group id:comment message: Home directory: shell directory
+ 
+ .json file format:
+ ------------------
+ 
+ {
+ "id": "training",
+ "comment": "training ops"
+ "uid": 2002,
+ "gid": 2003,
+ "home": "home/training",
+ "shell": "/bin/bash"
+ }
+ 
+ 
+ Once create .json files under data_bags/users folder, upload them into chef server using below command
+ chef-repo>data_bags>users>knife data bag from file users file1.json, file2.json
+ 
+ 
+ 
+ To schedule the job in chef client:
+ ==================================
+ -> Instead of executing everytime chef-apply command in chef client manually, we can schedule using below process.
+	1. go to /etc/cron.d
+	2. create file with user defined name, in our case chef-client
+	3. */2 * * * * root chef-client   -----root is the user -----chef-client is command which has to be executed.
+ 
+ knife bootstrap ip --x user -P password -N node-1 --run-list recipe[cb1]
+ 
+ 
+ Roles:
+ =====
+ 
+ knife role from file role.rb --> To upload roles into server (will be stored under policy>Roles )
+ Here role.rb is a file to create role.
+ knife role list - To display the list of roles in server
+ knife role show rolename --> To display how many cookbooks assigned to the particular role.
+ knife node run_list add node-2 "role[rolename]"

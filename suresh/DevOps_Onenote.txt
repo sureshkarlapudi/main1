@@ -1,0 +1,472 @@
+	1. Install git on your local machine and use git init to create your local repository. 
+	2. Go to the path where you want to create repository in your local and execute git init then .git folder will be created. This will be your local repository
+	-> git init - To create local repository (.git will be created in current path once execute this command)
+-> git remote add origin "https://github.com/Hariprasadnaidu/cucumberbasic.git"
+-> git clone - Download or clone your repository from GitHub.
+	Ex: git clone "https://github.com/sureshkarlapudi/cucumber.git"
+-> git pull origin master --It will fetch all the files from central repository to your local machine.
+ -> git remote -v  ---To know which remote repository linked with local repo.
+ -> git remote set-url --add origin "https://github.com/Hariprasadnaidu/cucumberbasic.git"  ---To update the existing remote URL
+ -> git remote rm origin/destination ---- To remove remote
+ -> git remote add origin "url" - To add your origin to remote.
+ -> git pull origin master - To fetch all file from central to local repo.
+ -> git add <file_name> --To add file to index 
+ -> git add -A ----To add all files to index
+ -> git commit -a -m "commiting changes" or git commit -am "commiting changes" ----To commit all files with user defined message
+
+ -> To create Branch
+		$ git branch sureshbranch
+
+ -> To switch Branch
+		$ git checkout sureshbranch
+
+ -> git branch ----To display all local branches 
+ -> git branch -r ----To display only remote branches
+ -> git branch -a ----To display all local & remote branches.
+
+
+Executive Summary
+$ git push --delete <remote_name> <branch_name>
+$ git branch -d <branch_name>
+Note that in most cases the remote name is origin.
+Delete Local Branch
+To delete the local branch use one of the following:
+$ git branch -d branch_name
+$ git branch -D branch_name
+Note: The -d option is an alias for --delete, which only deletes the branch if it has already been fully merged in its upstream branch. You could also use -D, which is an alias for --delete --force, which deletes the branch "irrespective of its merged status." [Source: man git-branch]
+
+
+
+ Merge: Combining work from different branches all together.
+
+If you want to merge changes dev to master.
+ 1. Checkout from master 
+ then 
+ 2. git merge dev
+ then all changes were done in dev will be merged into master branch.
+
+ git push: 
+	-> Everyone else can download/clone repository files, so when you are pushing changes to repository we need to have certain access rights.
+	-> To give the access follow below steps
+	1. generate ssh key in git bash under master branch using below command.
+	ssh-keygen 
+	2. then key file will be created in mentioned path.
+	3. copy content from the file and paste in git hub 
+	
+Git stash:
+	1. Git stash save "message"
+	2. Git stash list -----> To list all stash chenges
+	3. Git stash pop ----> To delete the most recent change
+	4. Git stash -- . ---> To go step back
+	5. Git stash clear ---> To delete all stash changes
+	6. Git stash drop stash@{0} ---> TO drop particular stash change
+
+
+Git pull --rebase origin master
+Use git mergetool to solve the conflicts
+
+https://github.com/CSC-DevOps/Course/blob/master/Project/CM.md
+
+
+
+
+
+ANsible:
+=======
+Red hat linux:
+	1. Create user
+	2. Add user in /etc/sudoers file
+	3. Enable file in /etc/ssh/sshd_config like below (in both master & client machines)
+		a. PermitRootLogin yes
+		b. Passwordauthentication yes
+		c. Restart the service "service sshd restart"
+	4. Ssh-keygen
+	5. Ssh-copy-id "ipaddress"
+	6. Check ssh user@"ip for client machine"
+	7. Sudo yum install wget
+	8. sudo wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	9. sudo rpm -ivh epel-release-latest-7.noarch.rpm
+	10. sudo yum update
+	11. sudo yum install ansible
+	12. Add client ip in inventory file
+
+The easiest way to install Ansible is by adding a third-party repository named EPEL (Extra Packages for Enterprise Linux), which is maintained over at http://fedoraproject.org/wiki/EPEL. 
+Sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum -y install ansible
+
+
+Conditional playbook
+Variables declaration
+Ansible Roles
+
+	1. Install LAMP Stack
+	2. Deploying a website
+	3. Ansible vault
+	4. ELK
+
+	1. Difference b/w ansible & ansible tower?
+	2. Templates 
+	3. When we go for playbooks & roles & templates & adhoc commands?
+	4. How to use tags in playbooks & roles?
+	5. How to change the default apache tomcat port using palybook?
+	6. If we have multiple tasks in playbook, how to skip the failed one and continue with next?
+	
+	
+	
+	
+	
+	
+	Wait_for:
+	With_items:
+	Prompt:
+
+	
+	
+	
+Jenkins:
+========
+
+Monday, June 18, 2018
+2:37 PM
+
+-> Active directory authentication
+-> Build Triggers
+-> Pipeline job
+-> Master/slave concept
+-> Back up when Jenkins server crashes
+
+https://www.youtube.com/watch?v=WUnRtcImOgg&index=15&list=PL6tu16kXT9PqIe2b0BGul-cXbmwGt7Ihw
+
+Global tool configuration:
+	To configure Installtion path for git/jdk/maven/tomcat
+
+MSBuild for Jenkins:
+https://blog.couchbase.com/continuous-deployment-with-jenkins-and-net/
+
+Pipeline:
+	Pipeline script
+		Node
+		     {
+		        stage 'checkout code'
+		             git 'https://github.com/executeautomation/SeleniumNUnitParam.git'
+		        stage 'restore Nuget'
+		             bat 'C:/tools/Nuget.exe restore SeleniumNUnitParam.sln'
+		         stage 'Build'
+		              bat "\"${tool 'MSBuild'}\" SeleniumNUnitParam.sln /p:Configuration=Debug /p:ProductVersion=1.0.0.${env.BUID_NUMBER}"
+		         stage 'Test'
+		              bat 'C:/tools/NUnit3.6/nunit3-console.exe SeleniumNUnitParam/bin/Debug/SeleniumNUnitParam.dll
+		        
+
+EC2 (VPC, subnet, s3)
+Load Balancing,
+Auto scaling,
+Route 53
+Monitoring services,
+IAM (user, groups, roles, policies, MFA)
+DB services
+SNS, SES, SQS
+Cloud watch & Cloud Trail
+
+
+Instance Family
+EC2 Storage Types
+Instance storage & EBS
+Purchase options (Reserved, on demand, spot)
+
+execute automation
+
+Devops123
+
+
+
+Active directory authentication
+Build Triggers
+
+Pipeline job
+master/slave concept
+back up when jenkins server crashes
+
+
+
+
+Linux:
+=====
+
+Linux
+
+Java Installation:
+sudo yum install java-1.8.0
+sudo yum remove java-1.7.0-openjdk
+
+From <https://medium.com/@itsmattburgess/installing-jenkins-on-amazon-linux-16aaa02c369c> 
+
+Saturday, July 28, 2018
+11:47 PM
+
+to give full permissions to particular user
+/etc/visudo
+
+Linuxjourney.com	
+
+	1. File transfer one server to another
+	2. Vi editor commands
+	3. How to check port
+	4. Top command
+
+-> TO create user:
+$useradd test
+$passwd test
+-> To enable password authentication:
+/etc/ssh/sshd_config
+	- Password authentication yes  - To enable to enter the password while login
+	- Password authentication no  - This will allow to login only with key, but not with password
+	- Service sshd restart 
+		or 
+	- systemctl restart sshd
+	- Systemctl stop sshd
+	- Systemctl status sshd
+
+Vi etc/sudoers from root user or the user who has been already added in the sudoers file.
+
+Go to the bottom and enter like below.
+<user_name>      ALL=(ALL)     NOPASSWD: ALL
+Ex: ec2-user         ALL=(ALL)     NOPASSWD: ALL
+ - Reason the the above entry in the sudoes file is, it should not ask the password if we want to switch root.
+
+Cp -pr <file1> <file2>
+
+Sudo -l ----> To check whet
+
+Ps -ef | grep tomcat
+Rm -rf <directory_name>
+Tar -xvf <file_name>
+
+
+Environment variables:
+	- /etc/profile.d/
+	- Create file java.sh
+	- export M2_HOME=/opt/maven/apache-maven-3.5.4
+	- export PATH=$PATH:$M2_HOME/bin/
+
+	1. To see which kernel version is running?
+	Uname - prints out system information 
+	Uname -a 
+		Host name, OS, Kernal, release, kernal version, architecture etc
+	Uname -v ---> Kernel version
+	Uname -r ---> Release
+	2. To see ip address
+		a. Ifconfig
+		b. Ip addr show eth0
+	3. To check disk free space
+		a. df -ah ---> all file systems in human readable format
+	4. Service tomcat status/start/stop
+	5. Systemctl status tomcat
+	6. To check total size of directories
+		a. du -sh <directory_name>
+	7. To check open ports in Linux
+		a. Netstat  ---> for all ports
+		b. Netstat -tulpn ---> non owned process info will not be shown
+	8. To check CPU usage for a process
+	   a.  Ps aux | grep ngnix
+	Or
+	9.  top command to see CPU usage for process - it will update every 5 sec
+	10.  htop will work same like top, also graphical representation, we search strings using / .
+	11.  etc/fstab -> To see the mount details
+
+SSH-KEYGEN
+
+Kernel messages will be stored in /var/log/dmesg file
+
+ root - root accounts home directory
+ bin & sbin - executable programs are stored in bin & sbin
+
+Cat /etc/passwd   or cat /etc/shadow
+
+Username:password:user_id:group_id:comment/label message:home directory: shell directory
+
+
+
+Hands-Once:
+==========
+
+	- How pull request & merge will work?
+
+	- Initial step: who will create clone the code to newly created branch.
+	- Once development is done, how to deploy the code to other env.
+	- How to check who modified the code and when?
+	- How to let GRCM team know which source code to be promoted into ist/qat/nft/prd.
+	
+	
+	
+	
+	
+	
+	
+	branch delete
+	release branch
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	develop
+	
+	configure general settings (job name, how many builds), svn, email notification, pre psot build , build.
+	application java versions
+	master/slave configuration
+	maven goals
+	compile, deploy,test
+	
+	
+	switch between branches - checkout
+	git pull
+	git stash
+	git revert
+	git rebase
+	push
+	fetch 
+	fetch upstream
+	
+	.git (in config, up/down stream configure)
+	
+	
+	
+	Ansible:
+	what is the use
+	language
+	playbook
+	adhoc commands
+	
+	
+	disk usage df -h .
+	
+	su -i
+	mkdir
+	cp
+	copy file or dir
+	file ni tar how
+	how zip file & unzip
+	check the process in host
+	application port is listening or not?
+	host ip check
+	top command
+	scp & sftp copy server to server
+	how many ports are listening (for one application)
+	how stop and restart te process
+	ssh - 22
+	smtp - 25
+	dns - 53
+	http - 80
+	https- 443
+	dhcp - 68
+	ftp - 21
+	netstad to add port
+	find based on size
+	vi editor commands
+	ps (processes status) is a native Unix/Linux utility for viewing information concerning a selection of running processes on a system: it reads this information from the virtual files in /proc filesystem. It is one of the important utilities for system administration specifically under process monitoring, to help you understand whats is going on a Linux system.
+	
+	From <https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/> 
+	
+	
+Maven:
+======
+-> Maven is build & Project management tool, we can create multiple executable files.
+cmd> mvn --version  --> To verify the maven installation & version 
+-> We have 3 repositories in maven like local, central and remote repositories.
+go to workspace path and execute below command
+mvn archetype:generate
+
+
+Things to note:
+==============
+
+Sunday, October 14, 2018
+10:46 AM
+
+.net applications in jenkins
+AWS practice
+
+
+	1. How to maintain two versions of tomcat & java in one server at the same time?
+	2. How tomcat will know/identify the java?
+	3. How the installation process will be done when we don’t have internet access to our environment?
+	4. How to give non root privileges to any user after instance launched? Using key.
+	
+
+	1. How to deploy .net applications and what are all the files involved in it?
+	2. Nexus admin?
+	3. What is the file for msbuild and how to set goals for it? Where we have define goals? POM for maven
+	4. What is the difference between grep/sed/awk?
+	5. How to notify developers about the issues if any in the deployment process?
+	6. Difference b/w git & bit bucket ?
+	7. What is variable for build number ?
+	8. How to install plugins in Jenkins, not from UI?
+	9. What are all the files will be also deployed when we deploy the application? 
+	10. How to handle tomcat logs and where these logs will be stored?
+	11. How to upload artifacts to nexus repository?
+
+Libraries in maven
+
+
+Tomcat
+
+Monday, October 15, 2018
+12:12 AM
+
+Windows: (If we want to change the default port from 8080 to any, change it from conf/server.xml)
+             <Connector port="9090" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+
+	- Download tomcat 9
+	- Go to apache-tomcat-9.0.12\bin and double click on startup.bat
+	- Copy below 2 lines from localhost:8080 home page and paste in tomcat-users.xml in conf folder 
+		○ <role rolename="manager_gui"/>
+		○ <user username="tomcat" password="tomcat" roles="manager_gui"/>
+	
+
+catalina.sh - for linux : JAVA_HOME is defined in this file
+
+
+Tomcat Installation: 
+====================
+extract folder is user defined. In our case /opt/tomcat
+	tar -xvf apache-tomcat-9.0.12.tar.gz
+	
+	- start the tomcat web server
+	# cd /opt/tomcat/tomcat9/bin
+# catalina.sh start or ./startup.sh
+	# catalina.sh stop or ./shutdown.sh
+	1. Service tomcat status/start/stop
+	2. Systemctl status tomcat
+	3. Systemctl start tomcat
+	4. Systemctl stop tomcat
+	5. Systemctl status tomcat
+	
+	- Add User & role
+	/opt/tomcat/apache-tomcat-8.5.34/conf/tomcat-users.xml
+	- To deploy the application
+	Copy/move war/jar files to webapps folder  /opt/tomcat/apache-tomcat-8.5.34/webapps
+	
+	From <https://www.tecmint.com/install-apache-tomcat-in-centos/> 
+
+	
+
+AWS:
+====
+	- How to configure and handle disaster recovery?
+	- What are the components in AWS?
+	- How many regions ?
+	- LVM in Linux?
+	- How do you ensure the security ?
+	- How will you handle the availability zone failure?
+
+Route53:
+The request which is going through Route53, it will respond with IP address
+TTL - Time to Live
+ - If this option is enabled then till the time ends the request will go to the same server and the request will reach Route53 only after TTL ends.
